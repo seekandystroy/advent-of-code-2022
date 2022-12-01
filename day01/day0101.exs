@@ -1,0 +1,7 @@
+File.stream!("input.txt")
+|> Stream.map(&String.trim/1)
+|> Stream.chunk_by(&(&1 == ""))
+|> Stream.reject(&(&1 == [""]))
+|> Stream.map(fn list -> Enum.map(list, &String.to_integer/1) |> Enum.sum() end)
+|> Enum.max()
+|> IO.inspect()
